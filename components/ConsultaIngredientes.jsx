@@ -22,7 +22,7 @@ export const ConsultaIngredientes = () => {
     //Funcion para crear consulta
 
     const CreateConsulta = async (e) => {
-        e.preventDefault();
+       /*  e.preventDefault(); */
 
 
         // ingrediente: ingrediente,

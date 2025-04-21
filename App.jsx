@@ -19,7 +19,7 @@ export const App = ()=>{
     <h1  className="title hvr-pop pt-2 ">Tus Recetas</h1>
       </Link> 
       <Link to="/consultaingredientes">
-      <button className="btn btn-outline-success title">Buscar por ingrediente</button></Link> 
+      <button className="btn btn-outline-success title ">Buscar por ingrediente</button></Link> 
       </header>
       
       <Routes>

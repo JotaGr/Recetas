@@ -2,7 +2,7 @@ import "./Footer.css";
 
 export const Footer = () => {
     return (
-        <div>
+        <div className="mt-5">
         <footer className="bg-gradient text-center footer">      
             <h5 className="text-light ">Copyright ©️ 2025 - Desarrollado por </h5>   
             <img className=" img-footer2" width="3%" height="3%" src="src/assets/LogoJotaDev.png" alt=""></img>
