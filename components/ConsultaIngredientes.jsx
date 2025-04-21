@@ -1,4 +1,4 @@
-
+/* 
 
 import { get } from "../../utils/httpCliente";
 //importaciones
@@ -13,6 +13,10 @@ export const ConsultaIngredientes = () => {
     const [ingrediente2, setIngrediente2] = useState("")
     const [ingrediente3, setIngrediente3] = useState("")
 
+    const [resultados, setResultados] = useState([]);       
+    const [error, setError] = useState(null);                
+    
+
 
     //navegacion luego de que se ejecute la funcion
     const navigate = useNavigate();
@@ -22,7 +26,7 @@ export const ConsultaIngredientes = () => {
     //Funcion para crear consulta
 
     const CreateConsulta = async (e) => {
-       /*  e.preventDefault(); */
+        e.preventDefault();
 
 
         // ingrediente: ingrediente,
@@ -91,7 +95,26 @@ export const ConsultaIngredientes = () => {
                         </div>
                         <button type="submit" className="btn btn-success">Consultar Ingrediente</button>
                     </form>
-                    
+                    {resultados.length > 0 && (
+            <div className="mt-4">
+              <h2>Resultados:</h2>
+              <div className="row">
+                {resultados.map(receta => (
+                  <div className="col-md-4 mb-3" key={receta.id}>
+                    <div className="card">
+                      <img src={receta.image} className="card-img-top" alt={receta.title} />
+                      <div className="card-body">
+                        <h5 className="card-title">{receta.title}</h5>
+                        <Link to={`/recipes/${receta.id}`} className="btn btn-primary">
+                          Ver receta
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
                 </div>
             </div>
@@ -102,4 +125,94 @@ export const ConsultaIngredientes = () => {
 
 
     )
-}
+} */
+    
+    //importaciones
+    import { useState } from "react"
+    import { Link, useNavigate } from "react-router-dom"
+    import { get } from "../../utils/httpCliente";
+    import "./ConsultaIngredientes.css"
+    
+    
+    export const ConsultaIngredientes = () => {
+      const [ingrediente, setIngrediente] = useState("");
+      const [ingrediente2, setIngrediente2] = useState("");
+      const [ingrediente3, setIngrediente3] = useState("");
+      const [resultados, setResultados] = useState([]);        // 1) Estado para guardar la respuesta
+      const [error, setError] = useState(null);                // opcional: para manejar errores
+    
+      const CreateConsulta = async (e) => {
+        e.preventDefault();                                     // ← crucial para que no recargue
+        setError(null);
+    
+        // Construyo la lista de ingredientes, filtro vacíos y hago URL-safe
+        const ingredientesList = [ingrediente, ingrediente2, ingrediente3]
+          .filter(str => str.trim() !== "")
+          .map(encodeURIComponent)
+          .join(",");
+    
+        if (!ingredientesList) {
+          setError("Debes ingresar al menos un ingrediente");
+          return;
+        }
+    
+        try {
+          const data = await get(`/recipes/findByIngredients?ingredients=${ingredientesList}`);
+            console.log(data);                                   
+          setResultados(data);                                 // 2) guardo datos en el estado
+        } catch (err) {
+          console.error(err);
+          setError("Error al consultar la API");
+        }
+      };
+    
+      return (
+        <div className="container">
+          <h1>Buscar recetas por ingrediente</h1>
+          <form onSubmit={CreateConsulta}>
+            {error && <div className="alert alert-danger">{error}</div>}
+    
+            {[{ val: ingrediente, fn: setIngrediente, label: "Ingrediente 1" },
+              { val: ingrediente2, fn: setIngrediente2, label: "Ingrediente 2" },
+              { val: ingrediente3, fn: setIngrediente3, label: "Ingrediente 3" }].map((fld, i) => (
+              <div className="mb-3" key={i}>
+                <label className="form-label">{fld.label}:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={fld.val}
+                  onChange={e => fld.fn(e.target.value)}
+                  placeholder={`Ej: ${fld.label.toLowerCase()}`}
+                />
+              </div>
+            ))}
+    
+            <button type="submit" className="btn btn-success">
+              Consultar
+            </button>
+          </form>
+    
+          {/* // 3 Muestro los resultados  */}
+          {resultados.length > 0 && (
+            <div className="mt-4">
+              <h2>Resultados:</h2>
+              <div className="row">
+                {resultados.map(receta => (
+                  <div className="col-md-4 mb-3" key={receta.id}>
+                    <div className="card bg-card">
+                      <img src={receta.image} className="card-img-top" alt={receta.title} />
+                      <div className="card-body">
+                        <h5 className="card-title">{receta.title}</h5>
+                        <Link to={`/recipes/${receta.id}`} className="btn btn-primary">
+                          Ver receta
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    };

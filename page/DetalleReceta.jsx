@@ -25,7 +25,7 @@ export const DetalleReceta = () => {
   return (
     <div  className="contenedorDetalle">
       <div className="card mb-3 text-center shadow align-items-center" style={{width:"45%", justifyContent:"center"}}>
-        <img className=" card-img-top shadow" src={receta.image} alt={receta.title} />
+        <img className=" card-img-top " src={receta.image} alt={receta.title} />
         <div className="recetadetalle  card-body text-center">
           <p className=" card-title">
            <h3> <strong> {receta.title}{" "} </strong></h3>            

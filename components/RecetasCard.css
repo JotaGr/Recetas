@@ -2,18 +2,23 @@
 
     .recetasCard{
         list-style: none;
-
         font-size: 1.5rem;
         text-align: center;
         gap: 10px;
-        border-radius: 30px;
+        border-radius: 5%;     
     }
+
+    .bg-card{
+      background-color: #e6ba78b0;
+  }
     
    .recetaImage{
         border-radius: 10px;
         background-color: azure;
-        width: 240px;
+        width: 230px;
         height: 210px; 
+        box-shadow: 10px;
+        
     }
 
     @-webkit-keyframes hvr-bob {
