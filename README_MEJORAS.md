@@ -178,12 +178,20 @@ src/
 
 ## 🚀 CÓMO USAR
 
+### ⚠️ IMPORTANTE: Configuración Requerida
+
+**Este proyecto requiere una API key de Spoonacular para funcionar.**
+
 ### 1. Configurar Variables de Entorno
 
 Crea un archivo `.env` en la raíz del proyecto:
 ```bash
 VITE_API_KEY=tu_api_key_de_spoonacular
 ```
+
+**Obtén tu API key gratuita en**: https://spoonacular.com/food-api
+
+**Nota**: El archivo `.env` NO se sube al repositorio (está en `.gitignore`). Cada desarrollador debe crear su propio archivo `.env` localmente.
 
 ### 2. Instalar Dependencias (si es necesario)
 ```bash

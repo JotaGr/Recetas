@@ -7,14 +7,15 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutos
 
 /**
  * Obtiene la API key desde variables de entorno
- * Si no existe, usa una por defecto (solo para desarrollo)
+ * Lanza un error si no está definida (seguridad)
  */
 const getApiKey = () => {
   const apiKey = import.meta.env.VITE_API_KEY;
   if (!apiKey) {
-    console.warn("⚠️ VITE_API_KEY no está definida. Crea un archivo .env con tu API key.");
-    // Fallback temporal - ELIMINAR en producción
-    return "6d85b7b20a7241678dba8453fc4846a2";
+    throw new Error(
+      "❌ VITE_API_KEY no está definida. " +
+      "Crea un archivo .env en la raíz del proyecto con: VITE_API_KEY=tu_api_key_aqui"
+    );
   }
   return apiKey;
 };
