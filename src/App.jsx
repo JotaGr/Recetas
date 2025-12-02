@@ -19,7 +19,7 @@ import "./fonts/fonts.css";
 export const App = () => {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename="/Recetas">
         <Layout>
           <Suspense fallback={<Loading message="Cargando página..." />}>
             <Routes>
