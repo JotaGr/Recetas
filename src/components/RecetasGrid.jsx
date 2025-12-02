@@ -1,29 +1,40 @@
-import { RecetasCard } from "./RecetasCard";
-import "./RecetasGrid.css"
+// Externos
+import { useMemo } from "react";
 
-import { get } from "../../utils/httpCliente";
-import { useState, useEffect } from "react";
+// Internos
+import { RecetasCard } from "./RecetasCard";
+import { useRecetas } from "../hooks/useRecetas";
+import { Loading } from "./Loading";
+import { ErrorMessage } from "./ErrorMessage";
+import { EmptyState } from "./EmptyState";
+
+// Estilos
+import "./RecetasGrid.css";
+import { MESSAGES } from "../config/constants";
 
 export const RecetasGrid = () => {
+  const { recetas, loading, error } = useRecetas();
 
-  const [recetas,setRecetas] = useState([])
+  // Memoizar para evitar re-renders innecesarios
+  const recetasMemo = useMemo(() => recetas, [recetas]);
 
-useEffect(()=>{
-  get("/recipes/complexSearch").then((data)=>{
-  console.log(data);
-  setRecetas(data.results)
-})
-},[])
+  if (loading) {
+    return <Loading message={MESSAGES.LOADING_RECETAS} />;
+  }
 
+  if (error) {
+    return <ErrorMessage error={error} />;
+  }
 
-   return (
-   <ul className="recetasGrid">
-      
-      {recetas.map((receta)=>(
-        <RecetasCard key={receta.id} receta={receta}/>
+  if (recetasMemo.length === 0) {
+    return <EmptyState title={MESSAGES.NO_RECETAS} icon="🍳" />;
+  }
+
+  return (
+    <ul className="recetasGrid">
+      {recetasMemo.map((receta) => (
+        <RecetasCard key={receta.id} receta={receta} />
       ))}
- 
-      
     </ul>
   );
- };
+};

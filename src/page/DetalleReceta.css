@@ -1,16 +1,48 @@
-.col{
-    max-width: 400px;
-    margin: 15px;
-    height: auto;
-    width: 80%;
-    border-radius: 20px;
-
+.contenedorDetalle {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+  min-height: 60vh;
 }
 
-.recetaDetalle{
-    font-size: 1.5rem;
+.detalle-receta-card {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.item{
-    margin-top: 0;
+.detalle-receta-image {
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.recetadetalle {
+  font-size: 1.1rem;
+}
+
+.instrucciones-texto {
+  text-align: left;
+  white-space: pre-line;
+  line-height: 1.8;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.list-group-item {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .detalle-receta-card {
+    width: 95%;
+  }
+
+  .recetadetalle {
+    font-size: 1rem;
+  }
 }

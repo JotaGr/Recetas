@@ -1,8 +1,70 @@
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  background-image: url('./assets/FONDO PAGINA RECETAS JOTA op 2_Mesa de trabajo 1.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 70vh;
+}
+
+
 .title{
     text-align: center;
-    font-size: 3rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073,
-    0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    font-size: 65px; 
+    color: #1e6e0eec;    
+    font-family: 'Dancing Script';
+    }
 
+
+
+header {
+  display: flex;
+  flex-direction: column; /* Apila los elementos en columna */
+  align-items: center; /* Centra horizontalmente */
+  text-align: center;
+  gap: 10px; /* Espaciado entre el título y el botón */
+  padding: 20px;
 }
+
+ @-webkit-keyframes hvr-pop {
+    50% {
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+  }
+  @keyframes hvr-pop {
+    50% {
+      -webkit-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+  }
+  .hvr-pop {
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+  .hvr-pop:hover, .hvr-pop:focus, .hvr-pop:active {
+    -webkit-animation-name: hvr-pop;
+    animation-name: hvr-pop;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+  } 

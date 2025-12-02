@@ -1,0 +1,41 @@
+footer {
+  background-color: #355716d5;
+  padding: 2rem 1rem;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.img-footer {
+  height: auto;
+  object-fit: contain;
+}
+
+.img-footer2 {
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 576px) {
+  .img-footer {
+    width: 33%;
+    max-width: 160px;
+  }
+
+  .img-footer2 {
+    width: 15%;
+    max-width: 48px;
+  }
+
+  .footer-logos {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+

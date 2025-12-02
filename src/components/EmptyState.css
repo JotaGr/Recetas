@@ -1,0 +1,28 @@
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.empty-state-title {
+  color: #1e6e0eec;
+  margin-bottom: 1rem;
+  font-family: 'Dancing Script', cursive;
+}
+
+.empty-state-message {
+  color: #6c757d;
+  font-size: 1.1rem;
+  max-width: 500px;
+}
+

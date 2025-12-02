@@ -1,105 +1,100 @@
+// Externos
+import { useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 
+// Internos
+import { useRecetasByIngredientes } from "../hooks/useRecetasByIngredientes";
+import { Loading } from "./Loading";
+import { ErrorMessage } from "./ErrorMessage";
+import { EmptyState } from "./EmptyState";
+import { RecetasCard } from "./RecetasCard";
 
-import { get } from "../../utils/httpCliente";
-//importaciones
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-
-
+// Estilos
+import "./ConsultaIngredientes.css";
+import { MESSAGES } from "../config/constants";
 
 export const ConsultaIngredientes = () => {
+  const [ingrediente, setIngrediente] = useState("");
+  const [ingrediente2, setIngrediente2] = useState("");
+  const [ingrediente3, setIngrediente3] = useState("");
 
-    const [ingrediente, setIngrediente] = useState("Ingrese ingrediente")
-    const [ingrediente2, setIngrediente2] = useState("Ingrese ingrediente")
-    const [ingrediente3, setIngrediente3] = useState("Ingrese ingrediente")
+  const { resultados, loading, error, buscarRecetas } = useRecetasByIngredientes();
 
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await buscarRecetas([ingrediente, ingrediente2, ingrediente3]);
+    },
+    [ingrediente, ingrediente2, ingrediente3, buscarRecetas]
+  );
 
-    //navegacion luego de que se ejecute la funcion
-    const navigate = useNavigate();
+  const camposIngredientes = [
+    { val: ingrediente, fn: setIngrediente, label: "Ingrediente 1", id: "ing1" },
+    { val: ingrediente2, fn: setIngrediente2, label: "Ingrediente 2", id: "ing2" },
+    { val: ingrediente3, fn: setIngrediente3, label: "Ingrediente 3", id: "ing3" },
+  ];
 
+  return (
+    <div className="container">
+      <h1 className="mb-4">Buscar recetas por ingrediente</h1>
+      
+      <form onSubmit={handleSubmit}>
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
 
+        {camposIngredientes.map((campo) => (
+          <div className="mb-3" key={campo.id}>
+            <label htmlFor={campo.id} className="form-label">
+              {campo.label}:
+            </label>
+            <input
+              id={campo.id}
+              type="text"
+              className="form-control"
+              value={campo.val}
+              onChange={(e) => campo.fn(e.target.value)}
+              placeholder={`Ej: ${campo.label.toLowerCase()}`}
+              aria-label={campo.label}
+            />
+          </div>
+        ))}
 
-    //Funcion para crear cONSUTLA
+        <button 
+          type="submit" 
+          className="btn btn-success"
+          disabled={loading}
+        >
+          {loading ? "Buscando..." : "Consultar"}
+        </button>
+      </form>
 
-    const CreateConsulta = async (e) => {
-        e.preventDefault();
+      {loading && <Loading message={MESSAGES.LOADING_BUSQUEDA} />}
 
+      {!loading && error && resultados.length === 0 && (
+        <ErrorMessage error={error} onRetry={() => handleSubmit({ preventDefault: () => {} })} />
+      )}
 
-        // ingrediente: ingrediente,
-        get(`/recipes/findByIngredients?ingredients=${ingrediente},+${ingrediente2},+${ingrediente3}`).then((data) => {
-            console.log(data);
+      {!loading && !error && resultados.length === 0 && (
+        <EmptyState 
+          title={MESSAGES.NO_RESULTADOS}
+          message="Intenta con otros ingredientes o busca recetas en la página principal."
+          icon="🔍"
+        />
+      )}
 
-    
-        })
-        //navigate(get(`/recipes/findByIngredients?ingredients=${ingrediente}`))
-        // navigate(`/recipes/findByIngredients?ingredients=${ingrediente}`)
-
-    }
-
-
-
-
-    return (
-
-        <div className="container">
-            <div className="row">
-                <div className="col">
-                    <h1>Ingrese Ingredientes:</h1>
-                    <form onSubmit={CreateConsulta}>
-                        <div className="mb-3">
-                            <label className="form-label">Ingrediente 1: </label>
-
-
-                            <input
-                                value={ingrediente}
-                                onChange={(e) => setIngrediente(e.target.value)}
-                                className="form-control"
-                                placeholder={ingrediente}
-                                type="text" />
-
-
-                        </div>
-
-
-                        <div className="mb-3">
-                            <label className="form-label">Ingrediente 2: </label>
-
-
-                            <input
-                                value={ingrediente2}
-                                onChange={(e) => setIngrediente2(e.target.value)}
-                                className="form-control"
-                                placeholder={ingrediente2}
-                                type="text" />
-
-
-                        </div>
-
-
-                        <div className="mb-3">
-                            <label className="form-label">Ingrediente 3: </label>
-
-
-                            <input
-                                value={ingrediente3}
-                                onChange={(e) => setIngrediente3(e.target.value)}
-                                className="form-control"
-                                placeholder={ingrediente3}
-                                type="text" />
-
-
-                        </div>
-                        <button type="submit" className="btn btn-primary">Consultar Ingrediente</button>
-                    </form>
-                    
-
-                </div>
-            </div>
-
-
+      {!loading && resultados.length > 0 && (
+        <div className="mt-4">
+          <h2>Resultados ({resultados.length}):</h2>
+          <ul className="recetasGrid">
+            {resultados.map((receta) => (
+              <RecetasCard key={receta.id} receta={receta} />
+            ))}
+          </ul>
         </div>
-
-
-
-    )
-}
+      )}
+    </div>
+  );
+};

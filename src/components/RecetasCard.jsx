@@ -1,16 +1,39 @@
-import {Link} from "react-router-dom"
+// Externos
+import { memo } from "react";
+import { Link } from "react-router-dom";
 
-import "./RecetasCard.css"
+// Estilos
+import "./RecetasCard.css";
 
-export const RecetasCard = ({ receta }) => {
-  
-  const imgURL=`${receta.image}`;
+/**
+ * Componente de tarjeta de receta
+ * Memoizado para evitar re-renders innecesarios
+ */
+export const RecetasCard = memo(({ receta }) => {
+  if (!receta || !receta.id) {
+    return null;
+  }
+
+  const imgURL = receta.image || "";
+  const title = receta.title || "Receta sin título";
+
   return (
-    <li className="recetasCard">
-      <Link to={`/receta/${receta.id}`}>
-      <img className="recetaImage" src={imgURL} alt={receta.title} />
-      <div>{receta.title}</div>
+    <li className="recetasCard bg-gradient bg-card">
+      <Link 
+        style={{ textDecoration: 'none' }} 
+        to={`/receta/${receta.id}`}
+        aria-label={`Ver detalles de ${title}`}
+      >
+        <img 
+          className="recetaImage hvr-bob" 
+          src={imgURL} 
+          alt={title}
+          loading="lazy"
+        />
+        <div className="text-dark">{title}</div>
       </Link>
     </li>
   );
-};
+});
+
+RecetasCard.displayName = "RecetasCard";
