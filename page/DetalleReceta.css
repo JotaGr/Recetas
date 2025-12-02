@@ -1,0 +1,23 @@
+/*  .col{ */
+   /*  max-width: 400px;
+    margin: 15px;
+    height: auto;
+    width: 80%; */
+    /* border-radius: 20px; */
+
+/* }  */
+
+.contenedorDetalle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem; 
+  }
+  
+.recetaDetalle{
+    font-size: 1.5rem;
+}
+
+.item{
+    margin-top: 0;
+}

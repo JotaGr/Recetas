@@ -1,0 +1,22 @@
+.img-footer{
+    @media (max-width: 576px) {
+      width: 33%;
+      height: 33%;
+      object-fit:contain;
+    }
+
+  }
+  .img-footer2{
+    @media (max-width: 576px) {
+      width: 15%;
+      height: 15%;
+      object-fit:contain;
+    }
+  }
+
+  footer{
+    background-color: #355716d5;
+    
+  }
+
+
