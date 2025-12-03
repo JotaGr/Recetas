@@ -89,3 +89,4 @@ El proyecto está bien estructurado en términos de seguridad, pero **NO debe ha
 
 **Última verificación**: 2025-12-02
 
+

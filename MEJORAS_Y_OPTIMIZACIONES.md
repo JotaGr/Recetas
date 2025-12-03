@@ -565,3 +565,4 @@ Cada mejora tiene un impacto positivo en:
 - **UX**: Mejor experiencia para el usuario final
 - **Escalabilidad**: Preparado para crecer
 
+

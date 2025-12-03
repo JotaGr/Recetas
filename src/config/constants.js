@@ -25,3 +25,4 @@ export const MESSAGES = {
   INGREDIENTE_REQUERIDO: "Debes ingresar al menos un ingrediente",
 };
 
+

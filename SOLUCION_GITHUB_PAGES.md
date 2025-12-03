@@ -112,3 +112,4 @@ Si el workflow no se ejecutó o falló:
 
 **Última actualización**: 2025-12-02
 
+
