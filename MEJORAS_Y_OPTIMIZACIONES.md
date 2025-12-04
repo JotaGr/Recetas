@@ -566,3 +566,4 @@ Cada mejora tiene un impacto positivo en:
 - **Escalabilidad**: Preparado para crecer
 
 
+
