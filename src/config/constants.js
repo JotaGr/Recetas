@@ -2,17 +2,6 @@
  * Constantes y configuración centralizada de la aplicación
  */
 
-export const APP_CONFIG = {
-  API_BASE_URL: "https://api.spoonacular.com",
-  CACHE_DURATION: 5 * 60 * 1000, // 5 minutos
-};
-
-export const ROUTES = {
-  HOME: "/",
-  RECETA_DETALLE: "/receta/:id",
-  CONSULTA_INGREDIENTES: "/consultaingredientes",
-};
-
 export const MESSAGES = {
   LOADING_RECETAS: "Cargando recetas...",
   LOADING_RECETA: "Cargando receta...",
