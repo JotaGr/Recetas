@@ -17,9 +17,10 @@ import "./app.css";
 import "./fonts/fonts.css";
 
 export const App = () => {
+  const base = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/$/, '') : '/';
   return (
     <ErrorBoundary>
-      <BrowserRouter basename="/Recetas">
+      <BrowserRouter basename={base}>
         <Layout>
           <Suspense fallback={<Loading message="Cargando página..." />}>
             <Routes>
